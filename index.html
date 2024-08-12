@@ -41,29 +41,30 @@
                 </p>
             </section>
         </div>
-    <div id="devLogContainer">
-        <section class="devPost">
-            <h1>July 23, 2024</h1>
-            <h2>What is Audio Nexus?</h2>
-            <p>
-                Audio Nexus is an audiobook filtering software. The idea was inspired by services like VidAngel, Enjoy, and ClearPlay that allow users to enjoy their favorite movies and TV shows without all the swearing or explicit content. I love to read and wanted to create a service that did the same for audiobooks. So Audio Nexus was born. This project will allow users to listen to audiobooks and filter out explicit language and other explicit content. 
-            </p>
-            <hr>
-            <h2>What is this site?</h2>
-            <p>
-                This site is essentially a blog about Audio Nexus. I will use it to post updates about the project, issues I'm running into, and give insights into my though process as the project develops and takes shape.
-            </p>
-            <hr>
-            <h2>How is the project going?</h2>
-            <p>
-                Audio Nexus is taking shape nicely. I have been programming the project using python. I created a basic media player that allows me to load in the audio file. I then send the file to OpenAI with the API to create timestamps/transcript for the audio. From there I process the timestamps to create a language filter automatically. But I'm realizing that I will probably need to create an easy way for human review. Not only to tag missed explicit language, but more importantly to tag other explicit content. I don't want to rely on an algorithms to try and create a filter for sexual or crude content. They are so subjective and don't have a clear cut start and end. So like, VidAngel I'm going to have to use human review and intuition to mark unsafe content.
-            </p>
-            <br>
-            <p>
-                So far the project is working okay with python. So I may still build the end user software with python. But right now using python to create the tags is pretty messy. I've been doing some research on which programming language is best when working with audio and the general consensus is C++. So I think I'm going to try and build the Admin side of the project with C++. But I've never worked with C++ so it'll be an interesting transition and learning process.
-            </p>
-        </section>
-    </div>
+        <hr>
+        <div id="devLogContainer">
+            <section class="devPost">
+                <h1>July 23, 2024</h1>
+                <h2>What is Audio Nexus?</h2>
+                <p>
+                    Audio Nexus is an audiobook filtering software. The idea was inspired by services like VidAngel, Enjoy, and ClearPlay that allow users to enjoy their favorite movies and TV shows without all the swearing or explicit content. I love to read and wanted to create a service that did the same for audiobooks. So Audio Nexus was born. This project will allow users to listen to audiobooks and filter out explicit language and other explicit content. 
+                </p>
+                <hr>
+                <h2>What is this site?</h2>
+                <p>
+                    This site is essentially a blog about Audio Nexus. I will use it to post updates about the project, issues I'm running into, and give insights into my though process as the project develops and takes shape.
+                </p>
+                <hr>
+                <h2>How is the project going?</h2>
+                <p>
+                    Audio Nexus is taking shape nicely. I have been programming the project using python. I created a basic media player that allows me to load in the audio file. I then send the file to OpenAI with the API to create timestamps/transcript for the audio. From there I process the timestamps to create a language filter automatically. But I'm realizing that I will probably need to create an easy way for human review. Not only to tag missed explicit language, but more importantly to tag other explicit content. I don't want to rely on an algorithms to try and create a filter for sexual or crude content. They are so subjective and don't have a clear cut start and end. So like, VidAngel I'm going to have to use human review and intuition to mark unsafe content.
+                </p>
+                <br>
+                <p>
+                    So far the project is working okay with python. So I may still build the end user software with python. But right now using python to create the tags is pretty messy. I've been doing some research on which programming language is best when working with audio and the general consensus is C++. So I think I'm going to try and build the Admin side of the project with C++. But I've never worked with C++ so it'll be an interesting transition and learning process.
+                </p>
+            </section>
+        </div>
     <div class="pagination-container" id="bottom-pagination">
     </div>
     </main>
