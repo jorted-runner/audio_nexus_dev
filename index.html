@@ -40,6 +40,10 @@
                 <p>
                     On Audio Nexus I have done some work. I've been working on the tagging system. I've managed to pull out all of the tag data, now I just need to decide how I want to save the data. For now I'll probably save it to a json file. Eventually I'll create a database for the data.
                 </p>
+                <br>
+                <p>
+                    I got the content filter tagging system pretty close to being done. The part I'm still struggling with is tracking the correct time. I came up with a pretty good method, but it seems to struggle to create tags that are less than 1 second. It will also really get thrown off the user starts creating a tag while the audio is not playing. I need to figure out a better way to track the elapsed time, tag start time, and tag end time. I also think I need to break the tag creation off into its own class.
+                </p>
             </section>
         </div>
         <hr>
