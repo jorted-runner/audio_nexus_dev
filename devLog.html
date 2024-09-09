@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Danny Ellis">
+    <meta name="description" content="Dev Log for Audio Nexus.">
+    <meta property="og:title" content="Audio Nexus Dev Log">
+    <title>Audio Nexus Site Dev Log</title>
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/smaller.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Montserrat&family=Poppins:ital,wght@1,500&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <script defer src="scripts/main.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Audio Nexus Dev Log</h1>
+    </header>
+    <nav>
+        <a href="./index.html">Home</a>
+        <a href="./devLog.html">Developer Log</a>
+    </nav>
+    <main>
+        <div class="pagination-container" id="top-pagination">
+        </div>
+        <div>
+            <label for="sortDropdown">Sort by date: </label>
+            <select id="sortDropdown">
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+            </select>
+        </div>
+        <div id="devLogContainer">
+            <section class="devPost">
+                <h1>September 5, 2024</h1>
+                <p>
+                    This project is going pretty slow right now. We finally decided to purchase a Mac Mini so I could start learning Swift and to develop iOS apps. So far Swift is surprisingly similar to C++. The structure and style reminds me a lot of what I was learning with C++ but has a similar readability to Python.
+                </p>
+                <br>
+                <p>
+                    On Audio Nexus I have done some work. I've been working on the tagging system. I've managed to pull out all of the tag data, now I just need to decide how I want to save the data. For now I'll probably save it to a json file. Eventually I'll create a database for the data.
+                </p>
+                <br>
+                <p>
+                    I got the content filter tagging system pretty close to being done. The part I'm still struggling with is tracking the correct time. I came up with a pretty good method, but it seems to struggle to create tags that are less than 1 second. It will also really get thrown off the user starts creating a tag while the audio is not playing. I need to figure out a better way to track the elapsed time, tag start time, and tag end time. I also think I need to break the tag creation off into its own class.
+                </p>
+            </section>
+        </div>
+        <hr>
+        <div id="devLogContainer">
+            <section class="devPost">
+                <h1>August 12, 2024</h1>
+                <p>
+                    So I've just been working on learning C++. So far its going pretty well. I think I still prefer Python overall but I do like C++. I do like that variables have stated types, the memory allocation aspect is interesting. It'll be interesting to learn more about it memory allocation to be able to help cut the bloat of my programs. One of the things I dislike about C++ is that arrays have static sizes and can't be expanded on the fly. Maybe there are more things I can learn about dynamic memory to work with arrays in a way that is more familiar.
+                </p>
+                <p>
+                    I haven't spent much time working on audiobook nexus recently. But for the project I want to use C++ to create the admin center where admins can create the filters for new audiobooks. I will either create a web application with Python and Flask, or possible FastHTML or Django to learn a new web framework. Or, and this is what I'd rather do, is build the user end of the application with Swift and create an app on iPhone. But that desire is dependent on me buying a Mac. So we'll see.
+                </p>
+            </section>
+        </div>
+        <hr>
+        <div id="devLogContainer">
+            <section class="devPost">
+                <h1>July 23, 2024</h1>
+                <h2>What is Audio Nexus?</h2>
+                <p>
+                    Audio Nexus is an audiobook filtering software. The idea was inspired by services like VidAngel, Enjoy, and ClearPlay that allow users to enjoy their favorite movies and TV shows without all the swearing or explicit content. I love to read and wanted to create a service that did the same for audiobooks. So Audio Nexus was born. This project will allow users to listen to audiobooks and filter out explicit language and other explicit content. 
+                </p>
+                <hr>
+                <h2>What is this site?</h2>
+                <p>
+                    This site is essentially a blog about Audio Nexus. I will use it to post updates about the project, issues I'm running into, and give insights into my though process as the project develops and takes shape.
+                </p>
+                <hr>
+                <h2>How is the project going?</h2>
+                <p>
+                    Audio Nexus is taking shape nicely. I have been programming the project using python. I created a basic media player that allows me to load in the audio file. I then send the file to OpenAI with the API to create timestamps/transcript for the audio. From there I process the timestamps to create a language filter automatically. But I'm realizing that I will probably need to create an easy way for human review. Not only to tag missed explicit language, but more importantly to tag other explicit content. I don't want to rely on an algorithms to try and create a filter for sexual or crude content. They are so subjective and don't have a clear cut start and end. So like, VidAngel I'm going to have to use human review and intuition to mark unsafe content.
+                </p>
+                <br>
+                <p>
+                    So far the project is working okay with python. So I may still build the end user software with python. But right now using python to create the tags is pretty messy. I've been doing some research on which programming language is best when working with audio and the general consensus is C++. So I think I'm going to try and build the Admin side of the project with C++. But I've never worked with C++ so it'll be an interesting transition and learning process.
+                </p>
+            </section>
+        </div>
+    <div class="pagination-container" id="bottom-pagination">
+    </div>
+    </main>
+    
+    <footer>
+        <p><br>Danny Ellis<br>danny5ellis1996@gmail.com<br>United States</p>
+    </footer>
+    
+    <script src="scripts/getdates.js"></script>
+    
+</body>
+</html>
