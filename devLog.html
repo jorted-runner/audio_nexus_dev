@@ -35,6 +35,14 @@
         </div>
         <div id="devLogContainer">
             <section class="devPost">
+                <h1>October 09, 2024</h1>
+                <p>
+                    The Admin Homepage is coming along pretty well. I found a wrapper for Kivy called KivyMD. It just allows for a few improvements to the UI and supports things likes lists. It took a little research but I was able to dynamically create the lists of books. Each page pulls in data from a data source and creates a list item. This part is still in the works, has a bunch of issues to workout but I was able to dynamically create a book view page. The page is then populated with data dynamically depending on the book selected. The main issue I'm having is the created screen is inheriting things from its parent. So the navigation bar of the parent is showing up in the child and causing a bunch of issues. I think I'll need to create another screen that is managed by the parent screen manager. This screen will be hidden until a book is selected.
+                </p>
+            </section>
+        </div>
+        <div id="devLogContainer">
+            <section class="devPost">
                 <h1>October 08, 2024</h1>
                 <p>
                     So that I don't forget. I'm starting to look at becoming an audiobook marketplace. I'm working to figure out what that would take and if it would be worth it.
