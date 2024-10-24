@@ -35,6 +35,14 @@
         </div>
         <div id="devLogContainer">
             <section class="devPost">
+                <h1>October 23, 2024</h1>
+                <p>
+                    The admin portal is all framed out, at least the books section. I will go back and work on the users and customers tabs later, but for now I want to finish this part. So now that the admin portal is built I need to finish the API. I need to be able to control playback and create contact tags. I also need to start thinking about the database I want to use. I want to pull the data in from the API so I need to think about how the data will be stored. One of the next hurdles is creating the automatic language filter. Right now the system I have created relies on sending the audio file to the OPENAI API and getting timestamp word locations, and then processing that data to identify words that need to be filtered, but that won't work with the Spotify API. Spotify prohibits sending the data to an AI. So I'll need to figure out another way to auto-filter the language, or just scratch that for the moment and create all manual tags.
+                </p>
+            </section>
+        </div>
+        <div id="devLogContainer">
+            <section class="devPost">
                 <h1>October 18, 2024</h1>
                 <p>
                     I've been making some pretty good progress on the Admin Portal. I'm now able to correctly display the different screens, load in book data, and display some filter data. I've also began laying out the work space section, where I'll be able to listen to the audiobooks and actually create the different filters. So far none of it is functional, I'm just building the bones, but it's looking good.
