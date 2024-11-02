@@ -35,6 +35,22 @@
         </div>
         <div id="devLogContainer">
             <section class="devPost">
+                <h1>November 1, 2024</h1>
+                <p>
+                    I migrated all the data to MongoDB. It is pretty slow, so I might migrate to a server side SQL database to speed up the queries. Right now there is a pretty noticeable lag between when you start the program up and when it actually begins to function. I like the MongoDB because it helps keep the server clean. Its more of an api gateway that directs the traffic to the correct resource, but if speed continues to be an issue I'll probably change it.
+                </p>
+                <br>
+                <p>
+                    The admin software, at least the filter creation aspect, is almost done. I am working on the tag creation system and then I just need to figure out the way I want to move books from Requested, To Do, In Progress, to Finished. After that I'll just need to actually create a few filters, and then make the iPhone app.
+                </p>
+                <br>
+                <p>
+                    I'm going to reach out to Audible and see if I can gain access to their API, and at what cost. I'm still moving forward wit Spotify because at the very least it will allow me to build a beta version and get user feedback. Spotify has its drawbacks I've talked about earlier, but it's the easiest to access currently.
+                </p>
+            </section>
+        </div>
+        <div id="devLogContainer">
+            <section class="devPost">
                 <h1>October 29, 2024</h1>
                 <p>
                     The admin portal is coming along very nicely. I am integrating it with the api I created. I am able to find the specific podcast, song, or audiobook, start playback, pause playback, and seek to specific position. I am working on a login system that requires the user to login to the desktop app, this is mainly to either request Spotify authentication or renew the stored authentication data. I mostly worked on the getting the login screen functioning and getting it to successfully block users from accessing any other pages until they login. That process is done, so I'm now going to get it to validate the user data and to get the correct spotify data.
