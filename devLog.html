@@ -35,6 +35,18 @@
         </div>
         <div id="devLogContainer">
             <section class="devPost">
+                <h1>November 9, 2024</h1>
+                <p>
+                    Desktop application is almost done. I've finished the tag creation process and finished a search functionality. I'm now working on a way to move the books from search to ToDo and from ToDo to In Progress or Finished. I just need a way to move the books around as needed. I also need a way to retrigger the get books from the database. I want the application to update pretty seamlessly. I also want the tag to be not only added to the database when I click save, but also added to the middle column of the book view. Right now I just need to be able to trigger the update in the background so that it updates it but doesn't cause it to feel really slow.
+                </p>
+                <br>
+                <p>
+                    I'm not going to start rebuilding the desktop app, but I'm not super happy with its feel. I just think that python was the wrong choice for a desktop application. I like using python for the functionality but for actually building the UI it just feels clunky. I want it to feel like a web app with that smoothness and responsiveness, but what I'm using just doesn't feel quite like that. I've heard Electron is a pretty good idea, or QT with C++. I originally started this project using C++ but decided to transition to python. But when I inevitable rebuild the desktop app, I'll use a different stack to do that. I'll keep the server in Python and FastAPI but the actual desktop app with be built with something else. But for now I'm just going to get this working and finished, so that I can finally work on the user facing app. I'm really excited to get started on that. I really enjoy Swift and like programming in it.
+                </p>
+            </section>
+        </div>
+        <div id="devLogContainer">
+            <section class="devPost">
                 <h1>November 1, 2024</h1>
                 <p>
                     I migrated all the data to MongoDB. It is pretty slow, so I might migrate to a server side SQL database to speed up the queries. Right now there is a pretty noticeable lag between when you start the program up and when it actually begins to function. I like the MongoDB because it helps keep the server clean. Its more of an api gateway that directs the traffic to the correct resource, but if speed continues to be an issue I'll probably change it.
