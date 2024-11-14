@@ -35,6 +35,14 @@
         </div>
         <div id="devLogContainer">
             <section class="devPost">
+                <h1>November 14, 2024</h1>
+                <p>
+                    So I went back and added the buttons to skip backward or forward 2 seconds. I also updated the increment and decrement tag start and tag end buttons so that the user can hold the button down to move faster. I also updated the play from tag start/end to actually play from the value displayed. These make it easier to create and adjust the tag as possible. I tried working on storing the Spotify Device IDs but it won't work quite how I hoped. The API from spotify only gives me the devices that the user currently has open. So to make it work the user has to have it open and playing for the API to correctly identify the device I'm targeting. I may still be able to store the data and let the user select which device to use, but no matter what, they have to open spotify before I can make it play. The Web API from spotify is basically just a remote control.
+                </p>
+            </section>
+        </div>
+        <div id="devLogContainer">
+            <section class="devPost">
                 <h1>November 13, 2024</h1>
                 <p>
                     So the desktop app if pretty much done. There are some optimization and functionality I'd like to add eventually, but it is working enough that I'm going to move on. Right now I've compromised with myself, the perfectionist part of myself wants to just keep working on this until its perfect, but I just keep thinking of cool things to add, so its time to move on. One of the biggest issues right now is that for it to play any audio I have to have spotify running and playing when I initially boot up the software. The API to get devices from spotify only returns devices with spotify open. I want to eventually add the ability for the user to select which device for playback, and save their devices to the database, that way even if its not currently playing the desktop app has its information. I'll get to it eventually, its on my ToDo list.
