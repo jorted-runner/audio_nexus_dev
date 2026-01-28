@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Danny Ellis">
-    <meta name="description" content="Development Site for Audio Nexus.">
-    <meta property="og:title" content="Audio Nexus Development Site">
-    <title>Audio Nexus Site Developer Site</title>
+    <meta name="description" content="Audio Nexus — audiobook content filtering app. VidAngel/ClearPlay for audiobooks.">
+    <meta property="og:title" content="Audio Nexus — Developer Site">
+    <title>Audio Nexus — Developer Site</title>
     <link rel="stylesheet" href="styles/normalize.css">
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/smaller.css">
@@ -27,19 +27,32 @@
         <h1>Audio Nexus</h1>
         <h2>What is Audio Nexus?</h2>
         <p>
-            Audio Nexus is an audiobook filtering service that enables users to enjoy their favorite books without unwanted language or content. It offers a customized listening experience by removing material that may not align with a user's preferences.
-        </p>
-        <h2>Who is Audio Nexus for?</h2>
-        <p>
-            Audio Nexus is designed for listeners who want to enjoy the latest books but prefer to skip over profanity, mature themes, or other content they find objectionable. It's perfect for anyone looking to tailor their audiobook experience to better suit their values and comfort level.
+            Audio Nexus is an audiobook content filtering app &mdash; think VidAngel or ClearPlay, but for audiobooks. Users listen to audiobooks on their iPhone with custom content filters that automatically skip over objectionable content during playback. No modified audio files are created &mdash; the player monitors your position in real-time and seeks past filtered segments, consistent with the Family Movie Act of 2005.
         </p>
         <h2>How does it work?</h2>
         <p>
-            Audio Nexus combines advanced algorithms, Artificial Intelligence, and human review to create customizable language and content filters for each audiobook. Users can easily toggle these filters on or off, allowing them to control what they hear and enjoy a personalized audiobook experience.
+            Content is tagged by category &mdash; profanity, slurs, blasphemy, violence, sexual content, crude humor, and substance use &mdash; using a waveform-based tagging tool built with wavesurfer.js. Each segment is tagged with a start time, end time, category, and severity level (mild, moderate, or severe). An AI pre-screening pipeline assists the process: faster-whisper transcribes the audio with word-level timestamps, a word-list scan flags known profanity, and a local LLM via Ollama analyzes the transcript for contextual content the word list can't catch. AI suggestions are then reviewed and confirmed by a human admin.
+        </p>
+        <p>
+            On the iOS app, users choose which categories and severity levels to filter. During playback, the audio player compares the current position against the preloaded filter map for the current chapter. When the position enters a filtered segment, the player seeks to the segment's end time. The user hears a brief silence and the content is skipped.
+        </p>
+        <h2>Architecture</h2>
+        <p>
+            The system is made up of four components: a Django REST API backend, a React admin single-page app for content tagging and catalog management, a SwiftUI iOS app with a custom AVFoundation-based audio player, and AWS infrastructure (S3, CloudFront, RDS) for storage and delivery. The backend serves both the iOS app and the admin frontend through a versioned REST API with JWT authentication.
+        </p>
+        <p>
+            For the MVP, audiobooks are sourced from LibriVox &mdash; public domain recordings hosted on Archive.org. The architecture is designed so that LibriVox can be cleanly replaced with publisher content when the time comes. The iOS app and tagging tool don't know or care where the audio comes from.
+        </p>
+        <h2>Project Status</h2>
+        <p>
+            Audio Nexus is currently in Phase 1 (MVP) development. The full architecture plan is complete &mdash; database schema, API endpoints, iOS screen designs, React admin components, infrastructure, LibriVox integration, LLM pipeline, DRM strategy, and legal considerations are all designed and documented. The focus is on the core feature: playback with real-time segment skipping.
+        </p>
+        <p>
+            Future phases will add a store with Stripe payments, household accounts with adult/child roles, user-created filter presets, HLS adaptive streaming, offline playback, and cross-device sync.
         </p>
         <h2>Who am I?</h2>
         <p>
-            My name is Danny Ellis. I am an avid reader and a passionate programmer. I love creating things that provide real benefits to others. I've loved reading my entire life, and I try to be mindful of the type of content I consume. I remember picking up a highly recommended book only to find it filled with language I wasn't comfortable with. That experience made me wish for a way to filter such content, which is why I decided to create Audio Nexus. Audio Nexus allows readers to customize their audiobook experience by filtering out language and material they’d rather avoid, making literature more accessible and enjoyable. I believe everyone should have the freedom to enjoy books in a way that aligns with their values, and I hope Audio Nexus is just the beginning of a broader movement toward customizable content.
+            My name is Danny Ellis. I am an avid reader and a passionate programmer. I love creating things that provide real benefits to others. I've loved reading my entire life, and I try to be mindful of the type of content I consume. I remember picking up a highly recommended book only to find it filled with language I wasn't comfortable with. That experience made me wish for a way to filter such content, which is why I decided to create Audio Nexus. Audio Nexus allows readers to customize their audiobook experience by filtering out language and material they'd rather avoid, making literature more accessible and enjoyable. I believe everyone should have the freedom to enjoy books in a way that aligns with their values, and I hope Audio Nexus is just the beginning of a broader movement toward customizable content.
         </p>
     </main>
     
