@@ -37,6 +37,39 @@
         <!-- New Dev Posts -->
         <div id="devLogContainer">
             <section class="devPost">
+                <h1>January 27, 2026</h1>
+                <h2>Back at it - Full Architecture Plan Complete</h2>
+                <p>
+                    It's been a while. School and life got in the way, but I'm finally back on Audio Nexus and I came back with a completely different mindset. Instead of just jumping into code like I did before, I sat down and planned the entire system top to bottom. I went back through every single prototype repo I've built over the last year and a half — the Tkinter desktop app, the FastAPI server, the Kivy admin, the UIKit prototype, the SwiftUI player, all of it. I pulled out what worked, what didn't, and what patterns I want to carry forward.
+                </p>
+                <br>
+                <p>
+                    The biggest shift is that I'm going fully self-hosted. I spent so much time last year fighting with Spotify's API, getting rejected by OverDrive, Audible, and Hoopla, trying to find some platform that would let me control playback at the segment level. None of them do. And Spotify's ToS blocked the auto-profanity detection I built with OpenAI. So I'm done trying to make third-party platforms work. For the MVP I'm using LibriVox public domain audiobooks — they're free, have an API, and the audio files are hosted on Archive.org permanently. That gives me everything I need to prove the concept without licensing headaches.
+                </p>
+                <br>
+                <p>
+                    The tech stack is completely different from where I started. Backend is Django with Django REST Framework — I picked it for the admin panel, the django-organizations library for households later, and the strong audio processing ecosystem. The admin frontend is a React SPA with wavesurfer.js for the waveform tagging tool. And the iOS app is SwiftUI with AVFoundation, which I'm excited about because the Audio-Player prototype I built already proved that AVPlayer works for what I need.
+                </p>
+                <br>
+                <p>
+                    I designed the full database schema, every API endpoint, the iOS screen-by-screen navigation, the React admin component structure, infrastructure and deployment, LibriVox integration details, the audio pipeline, DRM strategy, and legal considerations. The plan has 12 detailed sections covering everything. I even designed a rip-out strategy for LibriVox so when I eventually move to publisher content, I just delete one adapter class and a couple admin endpoints and everything else keeps working.
+                </p>
+                <br>
+                <p>
+                    One of the things I'm most excited about is the LLM pre-screening pipeline. Remember how the old Tkinter app used the OpenAI Whisper API to transcribe audio and scan for profanity? I'm doing the same thing but fully local now. faster-whisper for speech-to-text with word-level timestamps, and then Ollama running a local LLM for deeper content analysis — violence, sexual content, crude humor, stuff the word list can't catch. The AI creates suggested filter segments and then a human admin reviews and confirms them in the tagging tool. No cloud APIs, no ToS issues, no file size limits.
+                </p>
+                <br>
+                <p>
+                    I also restructured the project into separate repos — one for the backend, one for the iOS app, and this dev log moved into the parent repo as its own thing. Each repo has independent git history and CI/CD. The parent repo just holds the project plan and documentation.
+                </p>
+                <br>
+                <p>
+                    I'm honestly feeling really good about where things are. The plan is solid, it accounts for the lessons from every prototype I've built, and it's scoped properly — Phase 1 is just playback with real-time segment skipping, the tagging tool, and LibriVox content. No payments, no households, no store. Just the core feature. I'm ready to start writing code.
+                </p>
+            </section>
+        </div>
+        <div id="devLogContainer">
+            <section class="devPost">
                 <h1>January 15, 2025</h1>
                 <p>
                     School is picking up so I'm going to be holding off on this project for a little bit. I'll still work on it here and there but I need to make time for my course work. I'm also frustrated with the delays caused by getting data from mongodb. I think I'm going to switch to MySQL on the server. I thought that MongoDB was going to be nice because it removes a little bit of the hassle of designing and maintaining the database, but it is just so slow.
