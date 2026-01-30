@@ -37,6 +37,87 @@
         <!-- New Dev Posts -->
         <div id="devLogContainer">
             <section class="devPost">
+                <h1>January 29, 2026</h1>
+                <h2>Finishing the Planning Phase</h2>
+                <p>
+                    Finally knocked out the last two planning items today — the UI style guide and code standards. For the visual design, I went with a dark and immersive look inspired by Spotify and Audible. Kept the teal from my earlier iOS prototype as the primary brand color and added a teal-to-navy gradient for special moments like the player screen.
+                </p>
+                <br>
+                <h3>Color Palette</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 12px; margin: 16px 0;">
+                    <div style="text-align: center;">
+                        <div style="width: 60px; height: 60px; background: #0D0F14; border-radius: 8px; border: 1px solid #333;"></div>
+                        <small style="color: #888;">#0D0F14<br>Base</small>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 60px; height: 60px; background: #161A22; border-radius: 8px; border: 1px solid #333;"></div>
+                        <small style="color: #888;">#161A22<br>Elevated</small>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 60px; height: 60px; background: #1E232E; border-radius: 8px; border: 1px solid #333;"></div>
+                        <small style="color: #888;">#1E232E<br>Surface</small>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 60px; height: 60px; background: #0E87C5; border-radius: 8px;"></div>
+                        <small style="color: #888;">#0E87C5<br>Brand</small>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 60px; height: 60px; background: #1E1A4D; border-radius: 8px;"></div>
+                        <small style="color: #888;">#1E1A4D<br>Secondary</small>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #0E87C5 0%, #1E1A4D 100%); border-radius: 8px;"></div>
+                        <small style="color: #888;">Gradient<br>Accent</small>
+                    </div>
+                </div>
+                <br>
+                <h3>Filter Category Colors</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 12px; margin: 16px 0;">
+                    <div style="text-align: center;">
+                        <div style="width: 50px; height: 50px; background: #F97316; border-radius: 8px;"></div>
+                        <small style="color: #888;">Language</small>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 50px; height: 50px; background: #DC2626; border-radius: 8px;"></div>
+                        <small style="color: #888;">Violence</small>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 50px; height: 50px; background: #EC4899; border-radius: 8px;"></div>
+                        <small style="color: #888;">Sexual</small>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 50px; height: 50px; background: #EAB308; border-radius: 8px;"></div>
+                        <small style="color: #888;">Crude</small>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 50px; height: 50px; background: #8B5CF6; border-radius: 8px;"></div>
+                        <small style="color: #888;">Substance</small>
+                    </div>
+                </div>
+                <br>
+                <h3>Typography</h3>
+                <p>
+                    For fonts, I'm using SF Pro on iOS (system default, so no bundling needed) and Inter for the web admin. Inter is a geometric sans-serif that's clean and highly legible — perfect for dense UI like the tagging tool.
+                </p>
+                <div style="background: #1a1a1a; padding: 20px; border-radius: 12px; margin: 16px 0; font-family: 'Inter', -apple-system, sans-serif;">
+                    <p style="font-size: 32px; font-weight: 700; color: #fff; margin: 8px 0;">Display Bold 700</p>
+                    <p style="font-size: 24px; font-weight: 600; color: #fff; margin: 8px 0;">Heading Semibold 600</p>
+                    <p style="font-size: 16px; font-weight: 400; color: #A1A7B4; margin: 8px 0;">Body text in regular weight — this is what most content will look like.</p>
+                    <p style="font-size: 12px; font-weight: 500; color: #6B7280; margin: 8px 0;">CAPTION MEDIUM 500 — timestamps, metadata</p>
+                </div>
+                <br>
+                <h3>Code Standards</h3>
+                <p>
+                    For code standards, I set up Ruff for Python (it's insanely fast and replaces like five other tools), ESLint 9 with the new flat config for TypeScript, and SwiftLint via SPM for Swift. Also established a strict rule: no direct commits to main. Everything goes through a PR. Pre-commit hooks will auto-format and lint on every commit so we catch issues before they hit the repo.
+                </p>
+                <br>
+                <p>
+                    With this done, the entire planning phase is complete. PLAN.md has all 12 detailed sections, plus now STYLES.md and CODE_STANDARDS.md. I'm actually ready to start writing code. Next session I'll scaffold the Django backend and get the first models in place.
+                </p>
+            </section>
+        </div>
+        <div id="devLogContainer">
+            <section class="devPost">
                 <h1>January 27, 2026</h1>
                 <h2>Back at it - Full Architecture Plan Complete</h2>
                 <p>
