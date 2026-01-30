@@ -1,16 +1,26 @@
+/* Normalize - Inter font family */
+
 h1 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.75rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.75rem;
 }
 
-h3, h4 {
-    font-family: 'Montserrat', sans-serif; 
+h2, h3, h4 {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 a {
-    font-family: 'Montserrat', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 p, li {
-    font-family: 'Roboto', sans-serif; 
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+small {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+label, select, button {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }

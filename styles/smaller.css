@@ -1,10 +1,38 @@
 @media (max-width: 1150px) {
-    nav {
-        flex-direction: column;
-    }
-    body {
-        width: 90%;
-        margin: auto;
-        background-color: #fbf8ea;
-    }
+  nav {
+    flex-direction: column;
+  }
+
+  nav a {
+    padding: 12px;
+    border-bottom: 1px solid #1E232E;
+  }
+
+  nav a:last-child {
+    border-bottom: none;
+  }
+
+  body {
+    width: 90%;
+    margin: auto;
+    background-color: #0D0F14;
+  }
+
+  header > h1 {
+    font-size: 1.5rem;
+  }
+
+  .devPost {
+    padding: 16px;
+  }
+
+  .devPost h2 {
+    font-size: 20px;
+  }
+
+  .iframe-container iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
 }
