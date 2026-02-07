@@ -38,7 +38,7 @@
         <div id="devLogContainer">
             <section class="devPost">
                 <h1>February 7, 2026</h1>
-                <h2>First Real Code — Models + Auth API</h2>
+                <h2>First Real Code — Models, Auth, Catalog, and LibriVox Import</h2>
                 <p>
                     Started writing actual code today. Before jumping into the models, I went through all the open planning items to make sure nothing was unresolved. Knocked out three decisions that were blocking Step 2 — locked in data migrations for seed data (so filter categories get created automatically on <code>migrate</code>), added Factory Boy for test fixtures, and switched the DRF pagination to <code>limit/offset</code> to match what I spec'd in the API design.
                 </p>
@@ -64,7 +64,28 @@
                 </p>
                 <br>
                 <p>
-                    One thing I caught during implementation — the Genre model doesn't have a slug field, even though the plan spec'd filtering by <code>genres__slug</code>. Used <code>genres__name__iexact</code> instead, which actually works better since genre names are unique anyway. 16 new tests covering all three endpoints — published/unpublished filtering, search, genre filter, language filter, 404s for missing and unpublished content, unauthenticated access. All 60 tests pass. Next up is Step 5: the LibriVox import service.
+                    One thing I caught during implementation — the Genre model doesn't have a slug field, even though the plan spec'd filtering by <code>genres__slug</code>. Used <code>genres__name__iexact</code> instead, which actually works better since genre names are unique anyway. 16 new tests covering all three endpoints — published/unpublished filtering, search, genre filter, language filter, 404s for missing and unpublished content, unauthenticated access. All 60 tests pass.
+                </p>
+                <br>
+                <h3>Step 5: LibriVox Import Service</h3>
+                <p>
+                    Then I built out Step 5 — the LibriVox import service and admin API. This is the piece that lets me actually get audiobooks into the system. I created a <code>LibriVoxImportService</code> that can search the LibriVox API by title and import a full audiobook — it creates the Audiobook record, pulls in all the Authors and Genres (deduplicating them so I don't get duplicate "Mark Twain" entries), and creates Chapter records for every section with the Archive.org audio URLs.
+                </p>
+                <br>
+                <p>
+                    One thing I ran into during the planning phase was that the reference code I had written didn't match the real LibriVox API. Genres come back as a list of objects, not a comma-separated string. The <code>file_name</code> field is always null so I had to use <code>listen_url</code> instead. And <code>totaltimesecs</code> is just seconds as a string, not <code>HH:MM:SS</code>. Glad I caught that before writing the code.
+                </p>
+                <br>
+                <p>
+                    The import is idempotent — if you try to import the same book twice it just returns the existing one. Imported books come in as unpublished with a status of "imported" so they don't show up in the public catalog until an admin reviews and publishes them.
+                </p>
+                <br>
+                <p>
+                    I also built out the admin API layer — four new endpoints behind staff-only permissions. Admins can list all audiobooks (including unpublished), view/edit individual books, search LibriVox, and trigger imports. Regular users get a 403 and unauthenticated requests get a 401.
+                </p>
+                <br>
+                <p>
+                    49 new tests covering both the service layer (with mocked HTTP calls) and the API layer (with mocked service). All 109 tests pass, lint is clean. Next up is Step 6: the Filter API for categories and segments.
                 </p>
             </section>
         </div>
