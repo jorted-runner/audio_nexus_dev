@@ -38,54 +38,25 @@
         <div id="devLogContainer">
             <section class="devPost">
                 <h1>February 7, 2026</h1>
-                <h2>First Real Code — Models, Auth, Catalog, and LibriVox Import</h2>
+                <h2>Backend Foundation Complete</h2>
                 <p>
-                    Started writing actual code today. Before jumping into the models, I went through all the open planning items to make sure nothing was unresolved. Knocked out three decisions that were blocking Step 2 — locked in data migrations for seed data (so filter categories get created automatically on <code>migrate</code>), added Factory Boy for test fixtures, and switched the DRF pagination to <code>limit/offset</code> to match what I spec'd in the API design.
+                    Cranked through all the backend foundation steps today — models, auth, catalog, LibriVox import, and filter API. The entire backend is now in place.
                 </p>
                 <br>
                 <p>
-                    Then built out all the Phase 1 database models. The catalog app has Author, Genre, Audiobook, and Chapter. Audiobook has the tagging status pipeline I designed (<code>imported → needs_tagging → in_progress → fully_tagged</code>) and auto-generates unique slugs. The filtering app has FilterCategory and FilterSegment — I used <code>DecimalField</code> for the timestamps instead of <code>FloatField</code> to avoid floating-point rounding issues when the iOS player is comparing positions against segment boundaries. There's a database-level <code>CheckConstraint</code> that prevents <code>end_time</code> from being before <code>start_time</code>, which is the kind of thing that's easy to skip but painful to debug later. Also got the Transcript model in for the pre-screening pipeline.
+                    Started with the database models. Built out Author, Genre, Audiobook, and Chapter in the catalog app, plus FilterCategory and FilterSegment in the filtering app. Used <code>DecimalField</code> for segment timestamps to avoid float rounding issues during playback. Wrote a seed migration for all 7 filter categories and got everything registered in Django admin. Then built the auth API (register, login, token refresh, profile, password change) and the catalog API (audiobook list with search/filtering, detail with chapters, stream URLs).
                 </p>
                 <br>
                 <p>
-                    Wrote a seed data migration that creates all 7 filter categories — 3 language types (Profanity, Slur, Blasphemy) and 4 content types (Violence, Sexual Content, Crude Humor, Substance Use). Registered everything in Django admin with proper list displays, filters, and search. And wrote 33 tests with Factory Boy covering all the models — CRUD, constraints, cascading deletes, ordering, the works.
+                    Step 5 was the LibriVox import service — search their API, import a full audiobook with authors, genres, and chapters, all idempotent. Caught a few quirks where the real LibriVox API didn't match the reference docs I'd written. Imported books default to unpublished so an admin has to review them first.
                 </p>
                 <br>
                 <p>
-                    After the models were solid, I moved straight into Step 3 — the auth API. Created the whole <code>apps/accounts/api/</code> package: serializers, views, and URL routing. Six endpoints total: register, login, token refresh, profile (GET and PATCH), and password change. Registration creates the user and returns JWT tokens immediately, so the iOS app can log in right after signup without a separate call. I extended simplejwt's token serializer to include user data (id, email, display_name, is_staff) alongside the tokens — that way the app knows who's logged in without needing a separate profile fetch.
+                    Wrapped up with Step 6 — the Filter API. Two sets of endpoints: iOS-facing ones that return filter categories and segments grouped by chapter (only <code>manual</code> and <code>ai_confirmed</code>, with <code>?category=</code> and <code>?severity=</code> filters), and admin endpoints for full segment CRUD plus bulk create. The severity filter is "at or above" so <code>?severity=moderate</code> returns moderate and severe. Bulk create returns 201 or 207 multi-status depending on whether all segments pass validation.
                 </p>
                 <br>
                 <p>
-                    Wrote 11 API tests on top of the 33 model tests — password mismatch, duplicate email, invalid credentials, unauthenticated access, wrong old password. All 44 pass. Lint is clean.
-                </p>
-                <br>
-                <p>
-                    Knocked out Step 4 right after — the Catalog API. Three endpoints: audiobook list with search and filtering, audiobook detail with nested chapters, and a chapter stream URL endpoint. The list view filters by title search, genre name, and language, and only returns published audiobooks. The detail view prefetches authors, genres, and chapters so it's one query instead of N+1. The stream URL endpoint is set up with a service layer — right now it just returns the LibriVox/Archive.org URL directly, but the service is structured so I can swap in CloudFront presigned URLs later when I add self-hosted content.
-                </p>
-                <br>
-                <p>
-                    One thing I caught during implementation — the Genre model doesn't have a slug field, even though the plan spec'd filtering by <code>genres__slug</code>. Used <code>genres__name__iexact</code> instead, which actually works better since genre names are unique anyway. 16 new tests covering all three endpoints — published/unpublished filtering, search, genre filter, language filter, 404s for missing and unpublished content, unauthenticated access. All 60 tests pass.
-                </p>
-                <br>
-                <h3>Step 5: LibriVox Import Service</h3>
-                <p>
-                    Then I built out Step 5 — the LibriVox import service and admin API. This is the piece that lets me actually get audiobooks into the system. I created a <code>LibriVoxImportService</code> that can search the LibriVox API by title and import a full audiobook — it creates the Audiobook record, pulls in all the Authors and Genres (deduplicating them so I don't get duplicate "Mark Twain" entries), and creates Chapter records for every section with the Archive.org audio URLs.
-                </p>
-                <br>
-                <p>
-                    One thing I ran into during the planning phase was that the reference code I had written didn't match the real LibriVox API. Genres come back as a list of objects, not a comma-separated string. The <code>file_name</code> field is always null so I had to use <code>listen_url</code> instead. And <code>totaltimesecs</code> is just seconds as a string, not <code>HH:MM:SS</code>. Glad I caught that before writing the code.
-                </p>
-                <br>
-                <p>
-                    The import is idempotent — if you try to import the same book twice it just returns the existing one. Imported books come in as unpublished with a status of "imported" so they don't show up in the public catalog until an admin reviews and publishes them.
-                </p>
-                <br>
-                <p>
-                    I also built out the admin API layer — four new endpoints behind staff-only permissions. Admins can list all audiobooks (including unpublished), view/edit individual books, search LibriVox, and trigger imports. Regular users get a 403 and unauthenticated requests get a 401.
-                </p>
-                <br>
-                <p>
-                    49 new tests covering both the service layer (with mocked HTTP calls) and the API layer (with mocked service). All 109 tests pass, lint is clean. Next up is Step 6: the Filter API for categories and segments.
+                    140 tests passing across everything. Lint clean. The backend foundation is done — next up is the LLM pre-screening pipeline.
                 </p>
             </section>
         </div>
