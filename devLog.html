@@ -37,6 +37,31 @@
         <!-- New Dev Posts -->
         <div id="devLogContainer">
             <section class="devPost">
+                <h1>February 7, 2026</h1>
+                <h2>First Real Code — Models + Auth API</h2>
+                <p>
+                    Started writing actual code today. Before jumping into the models, I went through all the open planning items to make sure nothing was unresolved. Knocked out three decisions that were blocking Step 2 — locked in data migrations for seed data (so filter categories get created automatically on <code>migrate</code>), added Factory Boy for test fixtures, and switched the DRF pagination to <code>limit/offset</code> to match what I spec'd in the API design.
+                </p>
+                <br>
+                <p>
+                    Then built out all the Phase 1 database models. The catalog app has Author, Genre, Audiobook, and Chapter. Audiobook has the tagging status pipeline I designed (<code>imported → needs_tagging → in_progress → fully_tagged</code>) and auto-generates unique slugs. The filtering app has FilterCategory and FilterSegment — I used <code>DecimalField</code> for the timestamps instead of <code>FloatField</code> to avoid floating-point rounding issues when the iOS player is comparing positions against segment boundaries. There's a database-level <code>CheckConstraint</code> that prevents <code>end_time</code> from being before <code>start_time</code>, which is the kind of thing that's easy to skip but painful to debug later. Also got the Transcript model in for the pre-screening pipeline.
+                </p>
+                <br>
+                <p>
+                    Wrote a seed data migration that creates all 7 filter categories — 3 language types (Profanity, Slur, Blasphemy) and 4 content types (Violence, Sexual Content, Crude Humor, Substance Use). Registered everything in Django admin with proper list displays, filters, and search. And wrote 33 tests with Factory Boy covering all the models — CRUD, constraints, cascading deletes, ordering, the works.
+                </p>
+                <br>
+                <p>
+                    After the models were solid, I moved straight into Step 3 — the auth API. Created the whole <code>apps/accounts/api/</code> package: serializers, views, and URL routing. Six endpoints total: register, login, token refresh, profile (GET and PATCH), and password change. Registration creates the user and returns JWT tokens immediately, so the iOS app can log in right after signup without a separate call. I extended simplejwt's token serializer to include user data (id, email, display_name, is_staff) alongside the tokens — that way the app knows who's logged in without needing a separate profile fetch.
+                </p>
+                <br>
+                <p>
+                    Wrote 11 API tests on top of the 33 model tests — password mismatch, duplicate email, invalid credentials, unauthenticated access, wrong old password. All 44 pass. Lint is clean. Next up is Step 4: the Catalog API — audiobook list with search and filtering, detail views with nested chapters, and the stream URL endpoint.
+                </p>
+            </section>
+        </div>
+        <div id="devLogContainer">
+            <section class="devPost">
                 <h1>January 29, 2026</h1>
                 <h2>Finishing the Planning Phase</h2>
                 <p>
