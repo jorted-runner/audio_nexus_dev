@@ -56,7 +56,15 @@
                 </p>
                 <br>
                 <p>
-                    Wrote 11 API tests on top of the 33 model tests — password mismatch, duplicate email, invalid credentials, unauthenticated access, wrong old password. All 44 pass. Lint is clean. Next up is Step 4: the Catalog API — audiobook list with search and filtering, detail views with nested chapters, and the stream URL endpoint.
+                    Wrote 11 API tests on top of the 33 model tests — password mismatch, duplicate email, invalid credentials, unauthenticated access, wrong old password. All 44 pass. Lint is clean.
+                </p>
+                <br>
+                <p>
+                    Knocked out Step 4 right after — the Catalog API. Three endpoints: audiobook list with search and filtering, audiobook detail with nested chapters, and a chapter stream URL endpoint. The list view filters by title search, genre name, and language, and only returns published audiobooks. The detail view prefetches authors, genres, and chapters so it's one query instead of N+1. The stream URL endpoint is set up with a service layer — right now it just returns the LibriVox/Archive.org URL directly, but the service is structured so I can swap in CloudFront presigned URLs later when I add self-hosted content.
+                </p>
+                <br>
+                <p>
+                    One thing I caught during implementation — the Genre model doesn't have a slug field, even though the plan spec'd filtering by <code>genres__slug</code>. Used <code>genres__name__iexact</code> instead, which actually works better since genre names are unique anyway. 16 new tests covering all three endpoints — published/unpublished filtering, search, genre filter, language filter, 404s for missing and unpublished content, unauthenticated access. All 60 tests pass. Next up is Step 5: the LibriVox import service.
                 </p>
             </section>
         </div>
