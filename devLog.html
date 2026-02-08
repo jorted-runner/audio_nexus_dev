@@ -37,6 +37,31 @@
         <!-- New Dev Posts -->
         <div id="devLogContainer">
             <section class="devPost">
+                <h1>February 8, 2026</h1>
+                <h2>React Admin SPA</h2>
+                <p>
+                    Finally got to the frontend. After nine steps of backend-only work, today I built the React admin SPA from scratch. Scaffolded a Vite + React 19 + TypeScript project at <code>backend/admin_frontend/</code>, wired up Tailwind v4 with all the design tokens from STYLES.md, and set up ESLint 9 and Prettier per the code standards doc.
+                </p>
+                <br>
+                <p>
+                    The app has four pages: login, dashboard, audiobook list, and import. The login page checks that you're a staff user before letting you in. Dashboard shows stat cards (total audiobooks, chapters, segments, tagging pipeline breakdown) plus a recent imports table — I added a new backend endpoint for that so the frontend doesn't have to fetch everything and count it itself. The audiobook list has search and pagination, and the import page lets you search LibriVox and import books with one click.
+                </p>
+                <br>
+                <p>
+                    For auth I built a JWT interceptor with a refresh token mutex — if your access token expires mid-request, it refreshes once and replays any queued requests. If the refresh fails, you get kicked to login. The whole thing proxies through Vite's dev server so there's no CORS hassle.
+                </p>
+                <br>
+                <p>
+                    Had to install Node.js first since it wasn't on the machine yet (quick <code>brew install node</code>). Also learned that eslint-plugin-react-hooks v7 has a new <code>set-state-in-effect</code> rule that's pretty strict — had to restructure the AuthContext to initialize loading state from localStorage synchronously instead of setting it in the effect body.
+                </p>
+                <br>
+                <p>
+                    27 source files, 201 backend tests passing (5 new for the dashboard stats endpoint), and all frontend lint/format/typecheck clean. Next up is Step 11: the tagging tool with wavesurfer.js.
+                </p>
+            </section>
+        </div>
+        <div id="devLogContainer">
+            <section class="devPost">
                 <h1>February 7, 2026</h1>
                 <h2>Backend Foundation + Pre-Screening Services</h2>
                 <p>
