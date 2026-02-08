@@ -38,7 +38,7 @@
         <div id="devLogContainer">
             <section class="devPost">
                 <h1>February 7, 2026</h1>
-                <h2>Backend Foundation Complete</h2>
+                <h2>Backend Foundation + Pre-Screening Services</h2>
                 <p>
                     Cranked through all the backend foundation steps today — models, auth, catalog, LibriVox import, and filter API. The entire backend is now in place.
                 </p>
@@ -56,7 +56,19 @@
                 </p>
                 <br>
                 <p>
-                    140 tests passing across everything. Lint clean. The backend foundation is done — next up is the LLM pre-screening pipeline.
+                    With the backend foundation locked in at 140 tests, I kept going and started the LLM pre-screening pipeline — the system that automatically identifies objectionable content so admins don't have to tag everything from scratch.
+                </p>
+                <br>
+                <p>
+                    Built the <code>TranscriptionService</code> first. It wraps faster-whisper to transcribe chapter audio into text with word-level timestamps. Lazy-loads the Whisper model so it's not eating memory at import time, handles downloading audio to a temp file, runs transcription, and tracks status through PENDING to PROCESSING to COMPLETED/FAILED. It's idempotent — if a chapter already has a completed transcript it just returns it. Failed transcripts can be retried too, which meant clearing the old error message on retry (caught that one in tests).
+                </p>
+                <br>
+                <p>
+                    Then built the <code>ContentAnalysisService</code>, which runs a two-stage analysis. Stage 1 is a deterministic word-list scan — match each word against a JSON file of profanity, slurs, and blasphemy. Fast and reliable. Stage 2 sends the transcript to Ollama in 30-second chunks with 5-second overlap, asking the LLM to identify violence, sexual content, crude humor, and other stuff a word list can't catch. The LLM returns structured JSON with category, severity, and word indices that get mapped back to timestamps. If Ollama is down or returns garbage JSON, it logs a warning and moves on — no crashes. Both services create <code>FilterSegment</code> records with <code>source='ai_suggested'</code> so admins can review and confirm them in the tagging tool later.
+                </p>
+                <br>
+                <p>
+                    171 tests passing now (31 new, all mocked — no actual Whisper or Ollama calls). Lint clean. Next up is Step 9: pipeline orchestration to wire the services together with admin API endpoints and a management command.
                 </p>
             </section>
         </div>
