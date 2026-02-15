@@ -37,6 +37,27 @@
         <!-- New Dev Posts -->
         <div id="devLogContainer">
             <section class="devPost">
+                <h1>February 15, 2026</h1>
+                <h2>Email Verification</h2>
+                <p>
+                    Added email verification to the registration flow today. Up until now, anyone could register with any email address and immediately get access — fine for development, but definitely not something I'd want going to production. Now when you register, you get a 6-digit code sent to your email and you have to enter it before your account activates.
+                </p>
+                <br>
+                <p>
+                    On the backend, I added an <code>EmailVerification</code> model that stores the code with a 15-minute expiry and a max of 5 attempts. Registration now creates users as inactive (<code>is_active=False</code>), and the verify endpoint activates them and returns tokens. There's also a resend endpoint with a 60-second cooldown so people can't spam it. If someone tries to log in before verifying, they get a specific error that tells the iOS app to redirect them to the verification screen instead of just showing a generic failure.
+                </p>
+                <br>
+                <p>
+                    The iOS side was where the interesting bugs showed up. The first version looked like it worked, but when I actually tested it on the simulator, registering just kicked me back to the login screen. Turned out there were three interrelated issues: ContentView was destroying the registration NavigationStack when <code>isLoading</code> toggled (because it used that flag for the splash screen), DRF's <code>ValidationError</code> was wrapping the login guard's response values in arrays that iOS couldn't decode, and DRF field errors like <code>{"email": ["already exists"]}</code> weren't being parsed at all. Fixed all three — separated <code>isCheckingAuth</code> from <code>isLoading</code>, moved the login guard to return a proper <code>Response()</code> instead of raising <code>ValidationError</code>, and added a fallback parser for DRF's field error format.
+                </p>
+                <br>
+                <p>
+                    575 backend tests (38 new) and 116 iOS tests (8 new), all passing. Staff invites still bypass verification since the invite email itself is the proof of ownership.
+                </p>
+            </section>
+        </div>
+        <div id="devLogContainer">
+            <section class="devPost">
                 <h1>February 8, 2026</h1>
                 <h2>React Admin SPA</h2>
                 <p>
