@@ -38,6 +38,39 @@
         <div id="devLogContainer">
             <section class="devPost">
                 <h1>February 15, 2026</h1>
+                <h2>iOS UX Polish (Phase 4)</h2>
+                <p>
+                    Spent the session making the iOS app actually feel like a real audiobook app instead of a developer prototype. This was all about closing the gap between "it works" and "it feels good."
+                </p>
+                <br>
+                <p>
+                    The biggest user-facing change is the Continue Listening section at the top of the Library tab. Added a new bulk progress endpoint on the backend (<code>GET /api/v1/progress/</code>) that returns all your in-progress audiobooks in one request, then the iOS library loads that in parallel with the audiobook list. Books you've started show up in a horizontal scroll section with cover art, chapter info, progress bars, and time remaining. Everything else falls into a "Not Started" section below. The cards throughout the app now show progress bars and swap out the total duration for "2h 15m left" when you have progress data.
+                </p>
+                <br>
+                <p>
+                    The visual polish stuff is probably what makes the biggest impression though. The detail page and now playing screen now have blurred cover art backgrounds instead of flat dark backgrounds &mdash; it's that frosted glass look you see in Spotify and Apple Music. Cover art on the detail page got bigger (200x300 from 160x240) with a nice drop shadow, and the play button has a subtle brand-colored glow. The secondary actions row (Library/Download/Filters) has a translucent glass effect that looks great over the blurred background.
+                </p>
+                <br>
+                <p>
+                    Player improvements: the now playing screen shows "Chapter 3 of 24 &middot; 12 minutes remaining" between the progress bar and controls, and the bottom bar icons now have labels underneath ("Filters (5)", "Chapters (24)"). The mini player got an elevation shadow and better text hierarchy so it visually separates from the content below.
+                </p>
+                <br>
+                <p>
+                    Other quality-of-life stuff: context menus on long press (Remove from Library, Download, Share in Library; Add to Library, Share in Browse), haptic feedback on play/pause and library toggle actions, and shimmer skeleton loading states that match the card/row layouts instead of a generic spinner.
+                </p>
+                <br>
+                <p>
+                    Last piece was filter UI improvements &mdash; the content visualization bar is taller (24pt from 12pt) and easier to read, the toggle icons are shield-based instead of speaker-based which makes more conceptual sense for "content protection," and there's a new stats line showing exactly how many segments and seconds will be skipped.
+                </p>
+                <br>
+                <p>
+                    580 backend tests (5 new for the bulk progress endpoint), 116 iOS tests, all passing. Zero lint violations across the board.
+                </p>
+            </section>
+        </div>
+        <div id="devLogContainer">
+            <section class="devPost">
+                <h1>February 15, 2026</h1>
                 <h2>Email Verification</h2>
                 <p>
                     Added email verification to the registration flow today. Up until now, anyone could register with any email address and immediately get access — fine for development, but definitely not something I'd want going to production. Now when you register, you get a 6-digit code sent to your email and you have to enter it before your account activates.
