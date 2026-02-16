@@ -37,6 +37,30 @@
         <!-- New Dev Posts -->
         <div id="devLogContainer">
             <section class="devPost">
+                <h1>February 16, 2026</h1>
+                <h2>iOS UI Refinements — Custom Headers & Library Filters</h2>
+                <p>
+                    Today was focused on tightening up the iOS app's visual layout and adding some overdue library organization.
+                </p>
+                <br>
+                <p>
+                    The main annoyance I tackled was the excessive spacing at the top of every tab. iOS's default large navigation title creates this gap between the status bar and the title that just felt wasteful &mdash; especially on the Library tab where I'd just added filter chips using <code>.safeAreaInset</code> which made it even worse. The fix was replacing the system navigation titles with custom headers on Library, Request, and Settings. Now the title sits right at the top where it should be, and on Library the grid/list toggle button is on the same line as "Library" instead of floating above it in its own row.
+                </p>
+                <br>
+                <p>
+                    While I was in the Library view, I added filter chips (All, In Progress, Not Started, Finished) so you can actually filter your library. The "Finished" threshold is 95% progress. Also added a <code>LibraryFilter</code> enum and the supporting view model logic for the filtered lists, plus context menus for progress entries.
+                </p>
+                <br>
+                <p>
+                    For Request, I replaced the system <code>.searchable</code> modifier with a custom search bar since hiding the nav bar would have killed it. Looks cleaner honestly &mdash; matches the rest of the custom header style.
+                </p>
+                <br>
+                <p>
+                    A few other things snuck in: the login logo got bumped from 80pt to 120pt, the audiobook detail page now loads filters in parallel with progress data (instead of sequentially), there's a new filter status line showing how many segments will be skipped, and a collapsible chapter list on the detail view. Small stuff but it all adds up.
+                </p>
+            </section>
+
+            <section class="devPost">
                 <h1>February 15, 2026</h1>
                 <h2>iOS UX Polish (Phase 4)</h2>
                 <p>
