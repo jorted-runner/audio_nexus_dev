@@ -38,7 +38,42 @@
         <div id="devLogContainer">
             <section class="devPost">
                 <h1>February 16, 2026</h1>
-                <h2>The Rebrand — Audio Nexus is Now AudioHaven</h2>
+                <h2>iOS UX Polish &mdash; Final Six</h2>
+                <p>
+                    Knocked out the last six UX polish tasks today. These were the remaining items from the beta readiness report before we shift to infrastructure work.
+                </p>
+                <br>
+                <p>
+                    <strong>Toggle Button Redesign (C10)</strong> &mdash; Swapped out the shield icons on filter toggles for a speaker/mute metaphor. <code>speaker.slash.fill</code> for "filtering active" (content is muted), <code>speaker.wave.2.fill</code> for "not filtering" (content plays through), and <code>speaker.badge.exclamationmark</code> for mixed state. Updated both the FilterSelectionSheet toggle buttons and the DefaultFiltersView category rows. Much more intuitive &mdash; shield icons were too abstract.
+                </p>
+                <br>
+                <p>
+                    <strong>Enhanced Filter Statistics (C12)</strong> &mdash; The skip stats line in FilterSelectionSheet used to just show segment count and duration. Now it reads something like "12 segments across 5 chapters &middot; 45s (0.3%) will be skipped" &mdash; includes affected chapter count and percentage of total audiobook duration. Handles edge cases for zero segments and tiny percentages (&lt;0.1%).
+                </p>
+                <br>
+                <p>
+                    <strong>CategoryDetailView Polish (Section E)</strong> &mdash; Added colored severity dots (green for mild, orange for moderate, red for severe), speaker icons on each word row matching the C10 design, a word count in the section header, and Select All / Deselect All buttons for bulk word toggling. The view was functionally complete before but now looks and feels much more polished.
+                </p>
+                <br>
+                <p>
+                    <strong>Sleep Timer (H12)</strong> &mdash; Biggest piece of the session. Added a <code>SleepTimerMode</code> enum to AudioPlayerService with full timer logic &mdash; countdown for duration presets (15m/30m/45m/1h) and end-of-chapter detection that intercepts <code>handlePlaybackEnd()</code> to pause instead of auto-advancing. New SleepTimerSheet follows the ChapterPickerSheet pattern with checkmark on active selection and a destructive "Turn Off" button. Moon icon in the NowPlayingView bottom bar shows countdown when active, and a small moon indicator appears in the MiniPlayerBar too.
+                </p>
+                <br>
+                <p>
+                    <strong>Car Mode (H13)</strong> &mdash; Added a car icon toggle in the NowPlayingView toolbar. Swaps to an oversized controls layout &mdash; 36pt skip icons with 72x72 hit targets, 100pt play/pause button, large title text, no cover art or bottom bar. Shows sleep timer countdown if active. Animated transition between modes, resets on dismiss.
+                </p>
+                <br>
+                <p>
+                    <strong>Pull-to-Refresh Tint (M9)</strong> &mdash; Verified the <code>.tint(Color.brandPrimary)</code> on MainTabView already cascades to the refresh spinners in BrowseView and LibraryView. No changes needed.
+                </p>
+                <br>
+                <p>
+                    All 148 tests passing, build clean, lint clean (only pre-existing warnings). That's Phase 4 UX polish fully wrapped up.
+                </p>
+            </section>
+            <section class="devPost">
+                <h1>February 16, 2026</h1>
+                <h2>The Rebrand &mdash; Audio Nexus is Now AudioHaven</h2>
                 <p>
                     Big day. I pulled the trigger on the rebrand. Audio Nexus is now <strong>AudioHaven</strong>.
                 </p>
