@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Danny Ellis">
-    <meta name="description" content="Dev Log for Audio Nexus.">
-    <meta property="og:title" content="Audio Nexus Dev Log">
-    <title>Audio Nexus Site Dev Log</title>
+    <meta name="description" content="Dev Log for AudioHaven.">
+    <meta property="og:title" content="AudioHaven Dev Log">
+    <title>AudioHaven Dev Log</title>
     <link rel="stylesheet" href="styles/normalize.css">
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/smaller.css">
@@ -17,7 +17,7 @@
 </head>
 <body>
     <header>
-        <h1>Audio Nexus Dev Log</h1>
+        <h1>AudioHaven Dev Log</h1>
     </header>
     <nav>
         <a href="./index.html">Home</a>
@@ -35,6 +35,31 @@
         </div>
 
         <!-- New Dev Posts -->
+        <div id="devLogContainer">
+            <section class="devPost">
+                <h1>February 16, 2026</h1>
+                <h2>The Rebrand — Audio Nexus is Now AudioHaven</h2>
+                <p>
+                    Big day. I pulled the trigger on the rebrand. Audio Nexus is now <strong>AudioHaven</strong>.
+                </p>
+                <br>
+                <p>
+                    I'd been sitting on the name change for a while. "Audio Nexus" was always a working title &mdash; it described the project but never felt like a <em>product</em> name. AudioHaven felt right immediately when I landed on it. It's clean, it implies a safe space for listening, and the domain <code>audiohaven.app</code> was available for like $12/year. Done.
+                </p>
+                <br>
+                <p>
+                    The actual rename touched ~30 files across all four repos. Every user-facing string &mdash; email subjects, the admin sidebar, the login page, the marketing site, iOS display name, FAQ content, contact email &mdash; all updated from "Audio Nexus" to "AudioHaven" and <code>audionexus.com</code> to <code>audiohaven.app</code>. Internal stuff (module names, the Xcode project name, CLAUDE.md, PLAN.md) stays as-is. No reason to do a massive refactor of code identifiers when the product name is what matters.
+                </p>
+                <br>
+                <p>
+                    While I was at it, I scaffolded out the Android project. Created the <code>android/</code> directory with the full Kotlin + Jetpack Compose structure &mdash; <code>di/</code>, <code>data/</code>, <code>ui/</code>, <code>media/</code>, <code>download/</code>, <code>core/</code> &mdash; plus a CLAUDE.md that maps out the architecture, tech stack (Retrofit, ExoPlayer/Media3, Hilt, DataStore), and how it mirrors the iOS app. The API is already platform-agnostic so the Android app will consume the exact same 30+ endpoints. No backend changes needed. I'll build it myself once the iOS beta is live and getting feedback.
+                </p>
+                <br>
+                <p>
+                    All existing tests still pass &mdash; 587 backend, 177 admin frontend &mdash; and the one test that broke (it was asserting "Audio Nexus" in the login page heading) got updated. Four PRs up across the repos, one per repo.
+                </p>
+            </section>
+        </div>
         <div id="devLogContainer">
             <section class="devPost">
                 <h1>February 16, 2026</h1>
