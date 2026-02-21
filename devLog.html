@@ -37,6 +37,34 @@
         <!-- New Dev Posts -->
         <div id="devLogContainer">
             <section class="devPost">
+                <h1>February 21, 2026</h1>
+                <h2>Prescreening Pipeline Overhaul</h2>
+                <p>
+                    Big performance upgrade to the prescreening pipeline today. Three changes working together to cut wall-clock time for multi-chapter audiobook screening.
+                </p>
+                <br>
+                <p>
+                    <strong>Pipelined Processing</strong> &mdash; The biggest win. Replaced the old sequential &ldquo;transcribe chapter &rarr; analyze chapter &rarr; next chapter&rdquo; loop with a producer-consumer pattern. Now a background transcriber thread works ahead &mdash; transcribing chapter N+1 while the main thread analyzes chapter N. Uses a bounded queue (maxsize=1) so the transcriber doesn&rsquo;t run too far ahead and waste work if the job gets cancelled. Same cooperative cancellation with <code>threading.Event</code> for pause/cancel/shutdown.
+                </p>
+                <br>
+                <p>
+                    <strong>Smart Verification Skipping</strong> &mdash; Added a confidence threshold (default 0.85) for the LLM verification pass. High-confidence findings from the initial analysis skip the second LLM call entirely. Low-confidence findings still get verified as before. Saves roughly one Ollama round-trip per chapter when findings are clear-cut.
+                </p>
+                <br>
+                <p>
+                    <strong>Pipeline Settings Panel</strong> &mdash; New read-only settings panel on the Prescreen Queue page showing the current pipeline config (Whisper model, LLM model, context window, chunk workers, verification threshold, speed preset). Collapsible so it&rsquo;s out of the way during normal use. Also added a &ldquo;Completed&rdquo; timestamp column to the job table and improved sorting &mdash; historical jobs now sort by completion time with alphabetical title tiebreaking.
+                </p>
+                <br>
+                <p>
+                    Documented three speed presets in the env files (fast/balanced/quality) so it&rsquo;s easy to tune the pipeline per-environment.
+                </p>
+                <br>
+                <p>
+                    825 backend tests + 197 admin frontend tests, all passing.
+                </p>
+            </section>
+
+            <section class="devPost">
                 <h1>February 16, 2026</h1>
                 <h2>iOS UX Polish &mdash; Final Six</h2>
                 <p>
